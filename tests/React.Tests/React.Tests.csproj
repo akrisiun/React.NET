@@ -18,12 +18,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\React.Core\React.Core.csproj" />
+    <ProjectReference Include="..\..\src\React.Web.Mvc4\React.Web.Mvc5.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <ProjectReference Include="..\..\src\React.Owin\React.Owin.csproj" />
     <ProjectReference Include="..\..\src\React.Router.Mvc4\React.Router.Mvc4.csproj" />
-    <ProjectReference Include="..\..\src\React.Web.Mvc4\React.Web.Mvc4.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">

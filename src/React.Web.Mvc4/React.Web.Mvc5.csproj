@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Description>ReactJS tools for ASP.NET MVC 4 and 5. For ASP.NET Core, install React.AspNet instead! Please refer to project site (http://reactjs.net/) for more details, usage examples and sample code.</Description>
     <Copyright>Copyright 2014-Present Facebook, Inc</Copyright>
-    <AssemblyTitle>ReactJS.NET (MVC 4 and 5)</AssemblyTitle>
+    <AssemblyTitle>ReactJS.NET (MVC 5)</AssemblyTitle>
     <Authors>Daniel Lo Nigro</Authors>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>net452</TargetFramework>
     <DefineConstants>$(DefineConstants);LEGACYASPNET</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>React.Web.Mvc4</AssemblyName>
+    <AssemblyName>React.Web.Mvc5</AssemblyName>
     <AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
@@ -22,23 +22,27 @@
 
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs;..\React.AspNet\HtmlHelperExtensions.cs;..\React.AspNet\ActionHtmlString.cs" />
-    <Compile Include="..\SharedAssemblyVersionInfo.cs" />
-    <Content Include="Content\**\*">
+    <Compile Include="..\SharedAssemblyVersionInfo.cs" Link="Web\SharedAssemblyVersionInfo.cs" />
+	<Folder Include="Web\" />
+	<Compile Update="..\SharedAssemblyInfo.cs" Link="Web\SharedAssemblyInfo.cs" />
+	<Content Include="Content\**\*">
       <Pack>true</Pack>
       <PackagePath>content\</PackagePath>
     </Content>
+	  
+    <None Remove="Content\App_Start\ReactConfig.cs.pp" />
+    <None Remove="Content\web.config.transform" />
+	  
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\React.Core\React.Core.csproj" />
-    <ProjectReference Include="..\React.Web\React.Web.csproj" />
+	<ProjectReference Include="..\React.Core\React.Core.csproj" />
+	<PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" />
+	<PackageReference Include="WebActivatorEx" Version="2.2.0" />
+	<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System.Web" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />

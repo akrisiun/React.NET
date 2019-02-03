@@ -1,31 +1,34 @@
-/*
+﻿/*
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-#if NET40 || NET45 || NET452
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
+using System.Web.Caching;
 
-namespace React
+namespace React.Web
 {
 	/// <summary>
-	/// Memory cache implementation for React.ICache. Uses System.Runtime.Caching.
+	/// Implementation of <see cref="ICache"/> using ASP.NET cache.
 	/// </summary>
-	public class MemoryFileCache : ICache
+	public class AspNetCache : ICache
 	{
-		private readonly ObjectCache _cache;
+		/// <summary>
+		/// The ASP.NET cache
+		/// </summary>
+		private readonly Cache _cache;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MemoryFileCache"/> class.
-		/// </summary>		
-		public MemoryFileCache()
+		/// Initializes a new instance of the <see cref="AspNetCache"/> class.
+		/// </summary>
+		/// <param name="cache">The Web application cache</param>
+		public AspNetCache(Cache cache)
 		{
-			_cache = MemoryCache.Default;
+			_cache = cache;
 		}
 
 		/// <summary>
@@ -38,7 +41,7 @@ namespace React
 		/// <returns>Data from cache, otherwise <paramref name="fallback"/></returns>
 		public T Get<T>(string key, T fallback = default(T))
 		{
-			return (T)(_cache.Get(key) ?? fallback);
+			return (T)(_cache[key] ?? fallback);
 		}
 
 		/// <summary>
@@ -55,21 +58,17 @@ namespace React
 		/// Filenames this cached item is dependent on. If any of these files change, the cache
 		/// will be cleared automatically
 		/// </param>
-		public void Set<T>(string key, T data, TimeSpan slidingExpiration, IEnumerable<string> cacheDependencyFiles = null)
+		public void Set<T>(
+			string key,
+			T data,
+			TimeSpan slidingExpiration,
+			IEnumerable<string> cacheDependencyFiles = null
+		)
 		{
-			if (data == null)
-			{
-				_cache.Remove(key);
-				return;
-			}
-
-			var policy = new CacheItemPolicy { SlidingExpiration = slidingExpiration };
-
-			if (cacheDependencyFiles != null && cacheDependencyFiles.Any())
-				policy.ChangeMonitors.Add(new HostFileChangeMonitor(cacheDependencyFiles.ToList()));
-
-			_cache.Set(key, data, policy);
+			var cacheDependency = new CacheDependency(
+				(cacheDependencyFiles ?? Enumerable.Empty<string>()).ToArray()
+			);
+			_cache.Insert(key, data, cacheDependency, Cache.NoAbsoluteExpiration, slidingExpiration);
 		}
 	}
 }
-#endif

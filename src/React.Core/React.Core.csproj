@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>ReactJS and Babel tools for .NET. Important: This package does not do much on its own; you probably want an integration package (like React.Web.Mvc4) as well. Please refer to project site (http://reactjs.net/) for more details, usage examples and sample code.</Description>
     <Copyright>Copyright 2014-Present Facebook, Inc</Copyright>
     <AssemblyTitle>ReactJS.NET Core</AssemblyTitle>
     <Authors>Daniel Lo Nigro</Authors>
-    <TargetFrameworks>net40;net45;netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net40;net452;net461;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>React.Core</AssemblyName>
     <AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
@@ -23,6 +23,8 @@
     <Compile Remove="node_modules\**" />
     <EmbeddedResource Remove="node_modules\**" />
     <None Remove="node_modules\**" />
+    <None Remove="package-lock.json" />
+    <None Remove="yarn.lock" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,16 +36,16 @@
   <ItemGroup>
     <PackageReference Include="JavaScriptEngineSwitcher.Core" Version="3.0.0" />
     <PackageReference Include="JSPool" Version="4.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' Or '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' Or '$(TargetFramework)' == 'net452' ">
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' Or '$(TargetFramework)' == 'net461'  ">
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.1" />
     <PackageReference Include="System.Threading.Thread" Version="4.0.0" />
   </ItemGroup>

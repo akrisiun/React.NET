@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 using RegisterOptions = React.TinyIoC.TinyIoCContainer.RegisterOptions;
 
-#if !NET40 && !NET45
+#if !NET40 && !NET45 && !NET452
 using Microsoft.Extensions.DependencyModel;
 #endif
 
@@ -53,7 +53,7 @@ namespace React
 		private static void InitializeIoC(Func<RegisterOptions, RegisterOptions> requestLifetimeRegistration)
 		{
 			TinyIoCExtensions.AsRequestLifetime = requestLifetimeRegistration;
-#if NET40 || NET45
+#if NET40 || NET452
 			var types = AppDomain.CurrentDomain.GetAssemblies()
 				// Only bother checking React assemblies
 				.Where(IsReactAssembly)

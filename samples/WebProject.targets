@@ -1,0 +1,61 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Usage
+  <Import Project="..\WebProject.targets" />
+  
+    <ProjectGuid>{567F07E0-0287-459F-8717-30CDBF060529}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressUseClassicPipelineMode />
+    <MvcBuildViews>false</MvcBuildViews>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <RestorePackages>true</RestorePackages>
+        
+  <PropertyGroup Condition="Exists('C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v14.0')">
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <MSBuildExtensionsPath32>C:\Program Files (x86)\MSBuild</MSBuildExtensionsPath32>
+    <VSToolsPath>C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v14.0</VSToolsPath>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+        
+  -->
+  <Target Name="CoreCompile">
+    <!--
+    <Csc 
+    -->
+  </Target>
+
+  <!--
+    The target "GetTargetPath" does not exist in the project.	
+  -->
+  <Target Name="GetTargetPath" Returns="@(_FakeOutputPath)">
+    <ItemGroup>
+      <_FakeOutputPath Include="$(MSBuildProjectDirectory)\$(PackageOutputPath)\$(AssemblyName).UNK" />
+    </ItemGroup>
+  </Target>
+  
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- -->
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>88885</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8888/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>  

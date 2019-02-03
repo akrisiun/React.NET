@@ -25,7 +25,7 @@ namespace React
 		/// <summary>
 		/// Algorithm for calculating file hashes
 		/// </summary>
-#if NET40 || NET45
+#if NET40 || NET45 || NET452
 		private readonly HashAlgorithm _hash = SHA1.Create("System.Security.Cryptography.SHA1Cng");
 #else
 		private readonly HashAlgorithm _hash = SHA1.Create();

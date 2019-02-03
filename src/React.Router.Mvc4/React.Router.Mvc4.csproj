@@ -42,7 +42,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\React.Core\React.Core.csproj" />
-		<ProjectReference Include="..\React.Web.Mvc4\React.Web.Mvc4.csproj" />
+		<ProjectReference Include="..\React.Web.Mvc4\React.Web.Mvc5.csproj" />
 	</ItemGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
