@@ -40,7 +40,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 		<!-- NuGet packages for "legacy" projects (eg. React.Samples.Mvc4) -->
 		<Exec
 			WorkingDirectory="$(MSBuildProjectDirectory)"
-			Command="tools\NuGet\nuget.exe restore $(SolutionFile)"
+			Command="nuget restore $(SolutionFile)"
 		/>
 		<!-- NuGet packages for modern .csproj projects -->
 		<Exec
@@ -50,11 +50,11 @@ of patent rights can be found in the PATENTS file in the same directory.
 		<!-- npm packages -->
 		<Exec
 			WorkingDirectory="src/React.Core"
-			Command="npm install"
+			Command="yarn"
 		/>
 		<Exec
 			WorkingDirectory="src/React.Sample.Webpack.CoreMvc"
-			Command="npm install"
+			Command="yarn"
 		/>
 	</Target>
 
